@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>FlashCards – Math &amp; Sight Words</title>
+
+  <!-- PWA meta tags -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="FlashCards" />
+  <meta name="theme-color" content="#E53935" />
+  <meta name="application-name" content="FlashCards" />
+
+  <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22FlashCards%22%2C%22short_name%22%3A%22FlashCards%22%2C%22description%22%3A%22Fun%20math%20and%20sight%20word%20flash%20cards%20for%20kids%22%2C%22start_url%22%3A%22/%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23E53935%22%2C%22theme_color%22%3A%22%23E53935%22%2C%22orientation%22%3A%22portrait%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAFSUlEQVR4nO3dzW0bSRgE0BaxUazi0EHxbFwbjw6KQ5uGfPDaoCWS0zPT/997Z0Mk4Krq5hCCnlIHH68vnz1el7E9v70/tX7NJi8o8BzRohDVXkDoKalWGYr%2BUKGnhZJluJT6QcJPKyWzdrpJgk9PZ0%2BDUyeA8NPb2Qweao/gM6Ijp8HuE0D4GdWRbO4qgPAzur0ZzS6A8DOLPVnNKoDwj%2BHvf997v4Vp5GZ2swDCPwbh3y8nuw8LIPzMbivDxb4Jph7rX8/dAlj/8fz3z0vvtzClR1m%2BWQDhH4f1L%2BNepl2BBib89X0rgPVnVbeyfdn6B/Rh/ev4mnFXoAEJfzsKMAlPgOr4XQDXnzFY//qus%2B4EIDQFGIj1b%2B%2BSkuvPCIS/rV%2BZdwIQmgIMYGv9PQGqRwEI7eL%2B35e7fz8fry%2BfToCOhL8/BSA0BejE%2Bo9BAQbnCVBdCtCB9R%2BHAjQm/GNRAEJTgIas/3gUoBHhH5MCEJoCNHB0/T0CrU8BCE0BKnP3H5sCVCT841MAQlOASqz/HBRgUJ4AtaEAFVj/eShAYcI/FwUgNAUoyPrPRwEKEf45KcCAPAFqRwEKsP7zUgBCU4CTrP/cFOAE4Z%2BfAhCaAhxk/degAIPxCLQtBTjA%2Bq9DAXYS/rUoAKEpwA7Wfz0KkEn416QAA/EEqD0FyGD916UAhKYAG6z/2hTgAeFfnwIQmgLc0Xr9PQHqQwEITQFucPePQwG%2BEP5YFIDQFOCK9Y9HAQbgCVA/CvA/6x%2BTAiThj%2Byv3m%2BAeQq44lUt/AkwS/h6WzH8KQUvgPATugDkWXX9UwpcAOufZ%2BXwpxS4AJBS0AJY/zyrr39KAQsg/HkihD%2BlgAWAa6EKYP3zRFn/lIIVgG2Rwp9SoAJYf24JUQDhzxNt/VMKUgC2RQx/SgEKYP15ZOkCCH%2BeqOuf0uIFYFvk8Ke0cAGsPzmWLQDboq9/SosWwPpvE/6flvyd4Jn%2Bc5W1ryVPgFn0Cv9MA1GbAgQj/H9SAEJTgECs/3cK0Im/QDMGBSA0BQjA%2Bt%2BnAB149j8OBVic9X9MARYm/NsUoDHXn7EowKKsfx4FWJDw51MAQlOAhlrc/63/PgqwEOHfTwEITQEaqX39sf7HKMAChP84BSA0BWig5vXH%2Bp%2BjABMT/vMUgNAUYFLWvwwFqKzG/V/4y1EAQlOAyVj/shSgotLXH%2BEvTwEITQEmYf3rUIAJCH89ClCJX36fgwIMzvrXpQADE/76FKAC1595KMCgrH8bCjAg4W9HAQpz/ZmLAgzG%2BrelAAMR/vYUgNAUoKAz93/r34cCDED4%2B1EAQlOAQo5ef6x/XwrQkfD3pwCEpgAFHLn%2BWP8xKEAHwj8OBSA0BWjM%2Bo9FAU7ac/8X/vEoAKEpQCPWf0wKcELu9Uf4x6UAhKYAlVn/sSkAoSnAQTn3f%2Bs/PgWoRPjnoACEpgAHbF1/rP88Ls9v70%2B938RKhH8ez2/vT04AQlOAnR5df6z/fBSgEOGf0yWln3eh3m8EWvqVeSdAAdZ/Xgqww637v/DP7XcBXIOI4jrrToATrP/8FCDT1%2BuP8K/hjwK4BrG6rxn/dgIowTbrP6db2XYFynB9/RH%2BtdwsgFOA1dzL9N0TQAm%2Bs/5zepRlV6BMwr%2BmhwVwCvjD17PbyvDmCaAE1n9WOdnNDvfH68vnubcD7eQOd/ZnACcBs9iT1V0fgpWA0e3N6O6nQErAqI5k81SYfS5gBGdG%2BdT3AE4DejubwWIBdhrQUqnxLfZNsNOAVkpmrVponQiUVGtgm6y2MnBEi1tFl2uLQnBLj2v0DzpCljD1nOHlAAAAAElFTkSuQmCC%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image/png%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22data%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAQhklEQVR4nO3dy2GbyRFGUUhheOLQQvFMXI5nFopDTkNecCiBIB7/ox9VXeckYJKb71ZDGH%2B50MzP799%2Bzf4ZAFb21z8/vsz%2BGVbhD7mTkQeISRzs44/1hLEHyE0UPOYPc8XgA6xNEPxR/g9h9AFqqh4DJX95ow/AtYoxUOoXNvwAPFMpBJb/RY0%2BAEesHgPL/nKGH4AWVg2B5X4pww9AD6uFwDK/jOEHYIRVQiD9L2H4AZghewik/eENPwARZA2Br7N/gCOMPwBRZN2kVNWS9Y8MQA2ZXgNS/KCGH4BMMoRA%2BI8AjD8A2WTYrtABkOEPCAD3RN%2BwkE8U0f9oALBHxI8Ewr0AGH8AVhNx20IFQMQ/EAC0EG3jQjxJRPujAEBPET4SmP4CYPwBqCbC9k0NgAh/AACYYfYGTguA2b84AMw2cwunBIDxB4A3szZxeAAYfwD4aMY2Dg0A4w8A943eyGEBYPwB4LmRWzkkAIw/AGwzajO7B4DxB279578/Zv8IENqI7ewaAMYfuGX8YZveG9otAIw/AJzTc0u7BIDxB%2B5x/cN%2BvTZ1%2Bv8XAFDP//7%2BNvtHgPKaB4DrH7jH9Q/H9djWpgFg/IF7jD%2Bc13pjmwWA8QeAvlpurX8DAHTl%2BoeYmgSA6x8Axmi1uacDwPgDj9y7/n0DAM5rsb2nAsD4A494%2Boe%2Bzm6wfwMAAAUdDgDXP/CI6x/GOLPFXgAAoKBDAeD6Bx5x/cNYRzd5dwAYf%2BCRV%2BPvGwDQx5Ft9hEAABS0KwBc/8Ajnv5hrr0b7QUAOM34Qz6bA8D1DwCx7dlqLwDAKa5/yGlTALj%2BgbN8AwDG2LrZXgCAw1z/kNfLAHD9A/cYf4hry3Z7AQCAgp4GgOsfuMf1D/G92nAvAABQkAAAdjly/fsGAMTzMAA8/wO3PP1DLs%2B23AsAABR0NwBc/8At1z/k9GjTvQAAQEECAHjJ9Q/r%2BRQAnv%2BBa2fH3zcAYL572%2B4FAAAKEgDAQ57%2BYV0fAsDzPwCs6XbjvQAAd7n%2BYW0CAPjE%2BMP6BAAAFPQ7AHz%2BD1wuba9/XwGEWK633gsAABQkAIDffPYPdQgA4HK5GH%2BoRgAAQEFfLxf/ABCqc/1DHe%2Bb7wUA6MI3ACA2AQDFuf6hJgEAhRl/qEsAAEBBAgCKcv1DbQIACjL%2BwFdfAQRa8w0AiO3n92%2B/vABAMa5/4HLxEQAAlCQAoBDXP/BOAEARxh%2B4JgAAoCABAAWMvP59AwByEAAAUJAAgMX57B%2B4RwDAwow/8IgAAICCBAAsyvUPPCMAgGZ8AwDyEACwINc/8IoAgMUYf2ALAQAABQkAWIjrH9hKAABAQQIAFjH7%2BvcNAMhFAMACZo8/kI8AAICCBAAk5/oHjhAAAFCQAIDEXP/AUQIAkjL%2BwBkCADjNVwAhHwEACbn%2BgbMEAAAUJAAgGdc/0IIAgESMP9CKAACAggQAJBH1%2BvcNAMhJAEACUccfyEsAAEBBAgCCc/0DPQgAAChIAEBgrn%2BgFwEAQWUYf98AgLwEAAAUJAAgoAzXP5CbAACAggQABOP6B0YQABCI8QdGEQDAIb4BALkJAAjC9Q%2BMJAAAoCABAAG4/oHRBABMZvyBGQQAABQkAGCirNe/bwBAfgIAAAoSADBJ1usfWIMAgAmMPzCbAACAggQADOb6ByIQAMAuvgEAaxAAMJDrH4hCAMAgxh%2BIRAAAQEECAAZw/QPRCAAAKEgAQGeufyAiAQAdrTb%2BvgII6xAAAFCQAIBOVrv%2BgbUIAAAoSABAB65/IDoBAI0ZfyADAQBs4hsAsBYBAA25/oEsBAA0YvyBTAQAABQkAKAB1z%2BQjQAAgIIEAJxU4fr3DQBYjwCAEyqMP7AmAQAABQkAOMj1D2QmAACgIAEAB7j%2BgewEAOxUbfx9AwDWJAAAoCABADtUu/6BdQkAAChIAMBGrn9gJQIANjD%2BwGoEAPCQbwDAugQAvOD6B1YkAACgIAEAT7j%2BgVUJAHjA%2BAMrEwAAUJAAgDtc/74BAKsTAABQkACAG65/oAIBAFeMP1CFAACAggQA/Mv1D1QiAACgIAEAF9f/LV8BhPUJAMoz/kBFAgAAChIAlOb6B6oSAJRl/IHKBAAAFCQAKMn1/5hvAEANAgAAChIAlOP6BxAAFGP8Ad4IAAAoSABQhusf4A8BAPzmGwBQhwCgBNc/wEcCgOUZf4DPBAAAFCQAWJrrH%2BA%2BAQAABQkAluX638c3AKAWAcCSjD/AcwIAAAoSACzH9Q/wmgAAgIIEAEtx/QNsIwBYhvE/zjcAoB4BAAAFCQCW4PoH2EcAAEBBAoD0XP8A%2BwkAUjP%2BAMcIACjONwCgJgFAWq5/gOMEAAAU9OXn92%2B/Zv8QsJfrH974CIejvACQjvGHN8afMwQAABQkAEjF9Q9vXP%2BcJQBIw/jDG%2BNPCwIAAAoSAKTg%2Boc3rn9aEQAASRh/WhIAhOf6B2hPABCa8Yc3rn9aEwAAwRl/ehAAhOX6B%2BhHAAAE5vqnFwFASK5/MP70JQAIx/gD9CcAAAJy/dObACAU1z/AGAIAIBjXPyMIAMJw/YPxZxwBQAjGH2AsAQAQhOufkQQA07n%2BwfgzngAAgIIEAFO5/sH1zxwCgGmMPxh/5hEAAFCQAGAK1z%2B4/plLAABMYPyZTQAwnOsfYD4BwFDGH1z/xCAAAAYy/kQhABjG9Q8QhwAAGMT1TyQCgCFc/1Rn/IlGANCd8QeIRwAAdOb6JyIBQFeuf6oz/kQlAOjG%2BAPEJQAAOnH9E5kAoAvXP9UZf6ITAABQkACgOdc/1bn%2ByUAA0JTxB8hBAAA05PonCwFAM65/qjP%2BZCIAAKAgAUATrn%2Bqc/2TjQDgNONPdcafjAQAABQkADjF9U91rn%2ByEgAABxl/MhMAHOb6B8jry8/v337N/iGAOUTcca5/svMCAEUZ/%2BOMPysQAABQkAAA2MH1zyoEAMBGxp%2BVCAAoyOf/gAAA2MD1z2oEAMALxp8VCQAoxvM/cLkIAICnXP%2BsSgAAPGD8WZkAAICCBAAU4vP/7Vz/rE4AANww/lQgAACgIAEARXj%2B38b1TxUCAAAKEgAA/3L9U4kAALgYf%2BoRAFCAz/%2BBWwIAKM/1T0UCACjN%2BFOVAIDFef4H7hEAQFmufyoTAEBJxp/qBAAAFCQAYGE%2B/7/P9Q8CACjG%2BMMbAQAABQkAWJTn/89c//CHAABKMP7wkQAAgIIEACzI8/9Hrn/4TAAASzP%2BcJ8AAICCBACwLNc/PCYAYDE%2B/39j/OE5AQAABQkAYDmuf3hNAMBCPP8bf9hKAABAQQIAWIbrH7YTAABQkACARVT//N/1D/sIACA94w/7CQAAKEgAwAIqP/%2B7/uEYAQCkZfzhOAEAAAUJACAl1z%2BcIwAguYqf/xt/OE8AAEBBAgBIxfUPbQgASKza87/xh3YEAAAUJACAFFz/0JYAAMIz/tCeAICkqn3%2BD7QlAIDQXP/QhwAAwjL%2B0I8AgIQ8/wNnCQAgJNc/9CUAgHCMP/QnAACgIAEAyaz%2B%2Bb/rH8YQAEAYxh/GEQAAUJAAgERWfv53/cNYAgAAChIAwHSufxhPAABTGX%2BYQwBAEit//g%2BMJwCAaVz/MI8AAKYw/jCXAIAEPP8DrQkAYDjXP8wnAIChjD/EIAAAoCABAMGt9Pm/6x/iEADAEMYfYhEAAFCQAIDAVnn%2Bd/1DPAIA6Mr4Q0wCAAAKEgAQ1ArP/65/iEsAAF0Yf4hNAABAQQIAaM71D/EJAAgo8%2Bf/xh9yEAAAUJAAAJpx/UMeAgCCyfr8b/whFwEAAAUJAOA01z/kIwCAU4w/5CQAIJCsn/8D%2BQgA4DDXP%2BQlAACgIAEAQWR7/nf9Q24CANjN%2BEN%2BAgAAChIAwC6uf1iDAIAAsnz%2Bb/xhHQIAAAoSAMAmrn9YiwCAyTI8/xt/WI8AAICCBADwlOsf1iQAgIeMP6xLAMBEGT7/B9YkAIC7XP%2BwNgEAfGL8YX0CACbx/A/MJACAD1z/UIMAAH4z/lCHAACAggQATBDx83/XP9QiAADjDwUJAAAoSADAYNGe/13/UJMAgMKMP9QlAACgIAEARbn%2BoTYBAANF%2B/wfqEsAQEGuf0AAQDHGH7hcBAAM4/kfiEQAQCGuf%2BCdAIAijD9wTQAAQEECAAaY/fm/6x%2B4JQBgccYfuEcAAEBBAgA6m/n87/oHHhEAsCjjDzwjAACgIAEAHc16/nf9A68IAFiM8Qe2EAAAUJAAgIW4/oGtBAB0Mvrzf%2BMP7CEAAKAgAQALcP0DewkA6GDk87/xB44QAABQkACAxFz/wFECAJIy/sAZAgAam/n//gewlQCAhFz/wFkCAAAKEgDQ0Ijnf9c/0IIAgESMP9CKAACAggQAJOH6B1oSANBIz8//jT/QmgAAgIIEAATn%2Bgd6EADQQK/nf%2BMP9CIAAKAgAQBBuf6BngQABGT8gd4EAJzk//0PyOjrX//8%2BDL7hwD%2BcP0Dvf31z48vXgAgEOMPjCIA4ATP/0BWAgCCcP0DIwkACMD4A6MJAAAoSADAQa0%2B/3f9AzN8vVzevg4w%2BweBiow/MNr75nsBAICCBAAc0OL53/UPzCQAYALjD8wmAACgoN8B4B8Cwhiuf2CW6633AgA7%2Bc//AisQADCQ6x%2BIQgDAIMYfiORDAPh3APCc538gq9uN9wIAA7j%2BgWgEAHRm/IGIPgWAjwEAYC33tt0LAGx05PN/1z8QlQCATow/ENndAPAxAACs4dGmewGADfY%2B/7v%2BgegeBoBXADjG%2BANRPNtyLwAAUJAAgBf2PP%2B7/oEsngaAjwFgO%2BMPRPJqw70AAEBBLwPAKwC85voHItmy3V4A4Iktn/8bfyCjTQHgFQAActi62V4A4ATXP5DV5gDwCkA1r57/jT8QzZ6t9gIAAAXtCgCvAPDG9Q9Es3ejvQDATsYfWMHuAPAKQAV7/9//AGY6ss2HXgBEAFW5/oFojm6yjwAAoKDDAeAVgFU9ev53/QPRnNliLwCwgfEHVnMqALwCAMAcZzf49AuACGB1rn8gmhbb2%2BQjABHAKm4//zf%2BQDStNte/AQCAgpoFgFcAVuP6B6JpubVNXwBEAJldP/8bfyCa1hvb/CMAEQAAbfXYVv8GAG64/oEKugSAVwCyMv5ANL02tdsLgAggE//vf0BEPbe060cAIoBMXP9AJL03dMhA//z%2B7deI/x0AWMGIA3rIPwL0EgAA24zazGHfAhABAPDcyK0c%2BjVAEQAA943eyOH/HQARAAAfzdjGKf8hIBEAAG9mbeK0/xKgCACguplbOPU/BSwCAKhq9gZO//8CmP0HAIDRImzf9B/gmv9gEAArizD876a/AFyL9IcBgJaibVyoALhc4v2BAOCsiNsW7ge65iMBADKLOPzvwr0AXIv8hwOAZ6JvWOgAuFzi/wEB4FaG7Qr/A17zkQAAkWUY/ndpftBrQgCASDIN/7vwHwHck/EPDcCasm5Syh/6mtcAAGbIOvzvUv/w14QAACNkH/53S/wS14QAAD2sMvzvlvplrgkBAFpYbfjfLflLXRMCAByx6vC/W/qXuyUGAHhm9dG/VuYXvSYEALhWafjflfuFb4kBgJoqjv610r/8LTEAsLbqo3/NH%2BIJQQCQm8F/zB9mJ1EAEJOx38cfqyFxANCXkW/n/xXgJ2WzXpoFAAAAAElFTkSuQmCC%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image/png%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D" />
+
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAFSUlEQVR4nO3dzW0bSRgE0BaxUazi0EHxbFwbjw6KQ5uGfPDaoCWS0zPT/997Z0Mk4Krq5hCCnlIHH68vnz1el7E9v70/tX7NJi8o8BzRohDVXkDoKalWGYr+UKGnhZJluJT6QcJPKyWzdrpJgk9PZ0+DUyeA8NPb2Qweao/gM6Ijp8HuE0D4GdWRbO4qgPAzur0ZzS6A8DOLPVnNKoDwj+Hvf997v4Vp5GZ2swDCPwbh3y8nuw8LIPzMbivDxb4Jph7rX8/dAlj/8fz3z0vvtzClR1m+WQDhH4f1L+Nepl2BBib89X0rgPVnVbeyfdn6B/Rh/ev4mnFXoAEJfzsKMAlPgOr4XQDXnzFY//qus+4EIDQFGIj1b++SkuvPCIS/rV+ZdwIQmgIMYGv9PQGqRwEI7eL+35e7fz8fry+fToCOhL8/BSA0BejE+o9BAQbnCVBdCtCB9R+HAjQm/GNRAEJTgIas/3gUoBHhH5MCEJoCNHB0/T0CrU8BCE0BKnP3H5sCVCT841MAQlOASqz/HBRgUJ4AtaEAFVj/eShAYcI/FwUgNAUoyPrPRwEKEf45KcCAPAFqRwEKsP7zUgBCU4CTrP/cFOAE4Z+fAhCaAhxk/degAIPxCLQtBTjA+q9DAXYS/rUoAKEpwA7Wfz0KkEn416QAA/EEqD0FyGD916UAhKYAG6z/2hTgAeFfnwIQmgLc0Xr9PQHqQwEITQFucPePQwG+EP5YFIDQFOCK9Y9HAQbgCVA/CvA/6x+TAiThj+yv3m+AeQq44lUt/AkwS/h6WzH8KQUvgPATugDkWXX9UwpcAOufZ+XwpxS4AJBS0AJY/zyrr39KAQsg/HkihD+lgAWAa6EKYP3zRFn/lIIVgG2Rwp9SoAJYf24JUQDhzxNt/VMKUgC2RQx/SgEKYP15ZOkCCH+eqOuf0uIFYFvk8Ke0cAGsPzmWLQDboq9/SosWwPpvE/6flvyd4Jn+c5W1ryVPgFn0Cv9MA1GbAgQj/H9SAEJTgECs/3cK0Im/QDMGBSA0BQjA+t+nAB149j8OBVic9X9MARYm/NsUoDHXn7EowKKsfx4FWJDw51MAQlOAhlrc/63/PgqwEOHfTwEITQEaqX39sf7HKMAChP84BSA0BWig5vXH+p+jABMT/vMUgNAUYFLWvwwFqKzG/V/4y1EAQlOAyVj/shSgotLXH+EvTwEITQEmYf3rUIAJCH89ClCJX36fgwIMzvrXpQADE/76FKAC1595KMCgrH8bCjAg4W9HAQpz/ZmLAgzG+relAAMR/vYUgNAUoKAz93/r34cCDED4+1EAQlOAQo5ef6x/XwrQkfD3pwCEpgAFHLn+WP8xKEAHwj8OBSA0BWjM+o9FAU7ac/8X/vEoAKEpQCPWf0wKcELu9Uf4x6UAhKYAlVn/sSkAoSnAQTn3f+s/PgWoRPjnoACEpgAHbF1/rP88Ls9v70+938RKhH8ez2/vT04AQlOAnR5df6z/fBSgEOGf0yWln3eh3m8EWvqVeSdAAdZ/Xgqww637v/DP7XcBXIOI4jrrToATrP/8FCDT1+uP8K/hjwK4BrG6rxn/dgIowTbrP6db2XYFynB9/RH+tdwsgFOA1dzL9N0TQAm+s/5zepRlV6BMwr+mhwVwCvjD17PbyvDmCaAE1n9WOdnNDvfH68vnubcD7eQOd/ZnACcBs9iT1V0fgpWA0e3N6O6nQErAqI5k81SYfS5gBGdG+dT3AE4DejubwWIBdhrQUqnxLfZNsNOAVkpmrVponQiUVGtgm6y2MnBEi1tFl2uLQnBLj2v0DzpCljD1nOHlAAAAAElFTkSuQmCC" />
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAFSUlEQVR4nO3dzW0bSRgE0BaxUazi0EHxbFwbjw6KQ5uGfPDaoCWS0zPT/997Z0Mk4Krq5hCCnlIHH68vnz1el7E9v70/tX7NJi8o8BzRohDVXkDoKalWGYr+UKGnhZJluJT6QcJPKyWzdrpJgk9PZ0+DUyeA8NPb2Qweao/gM6Ijp8HuE0D4GdWRbO4qgPAzur0ZzS6A8DOLPVnNKoDwj+Hvf997v4Vp5GZ2swDCPwbh3y8nuw8LIPzMbivDxb4Jph7rX8/dAlj/8fz3z0vvtzClR1m+WQDhH4f1L+Nepl2BBib89X0rgPVnVbeyfdn6B/Rh/ev4mnFXoAEJfzsKMAlPgOr4XQDXnzFY//qus+4EIDQFGIj1b++SkuvPCIS/rV+ZdwIQmgIMYGv9PQGqRwEI7eL+35e7fz8fry+fToCOhL8/BSA0BejE+o9BAQbnCVBdCtCB9R+HAjQm/GNRAEJTgIas/3gUoBHhH5MCEJoCNHB0/T0CrU8BCE0BKnP3H5sCVCT841MAQlOASqz/HBRgUJ4AtaEAFVj/eShAYcI/FwUgNAUoyPrPRwEKEf45KcCAPAFqRwEKsP7zUgBCU4CTrP/cFOAE4Z+fAhCaAhxk/degAIPxCLQtBTjA+q9DAXYS/rUoAKEpwA7Wfz0KkEn416QAA/EEqD0FyGD916UAhKYAG6z/2hTgAeFfnwIQmgLc0Xr9PQHqQwEITQFucPePQwG+EP5YFIDQFOCK9Y9HAQbgCVA/CvA/6x+TAiThj+yv3m+AeQq44lUt/AkwS/h6WzH8KQUvgPATugDkWXX9UwpcAOufZ+XwpxS4AJBS0AJY/zyrr39KAQsg/HkihD+lgAWAa6EKYP3zRFn/lIIVgG2Rwp9SoAJYf24JUQDhzxNt/VMKUgC2RQx/SgEKYP15ZOkCCH+eqOuf0uIFYFvk8Ke0cAGsPzmWLQDboq9/SosWwPpvE/6flvyd4Jn+c5W1ryVPgFn0Cv9MA1GbAgQj/H9SAEJTgECs/3cK0Im/QDMGBSA0BQjA+t+nAB149j8OBVic9X9MARYm/NsUoDHXn7EowKKsfx4FWJDw51MAQlOAhlrc/63/PgqwEOHfTwEITQEaqX39sf7HKMAChP84BSA0BWig5vXH+p+jABMT/vMUgNAUYFLWvwwFqKzG/V/4y1EAQlOAyVj/shSgotLXH+EvTwEITQEmYf3rUIAJCH89ClCJX36fgwIMzvrXpQADE/76FKAC1595KMCgrH8bCjAg4W9HAQpz/ZmLAgzG+relAAMR/vYUgNAUoKAz93/r34cCDED4+1EAQlOAQo5ef6x/XwrQkfD3pwCEpgAFHLn+WP8xKEAHwj8OBSA0BWjM+o9FAU7ac/8X/vEoAKEpQCPWf0wKcELu9Uf4x6UAhKYAlVn/sSkAoSnAQTn3f+s/PgWoRPjnoACEpgAHbF1/rP88Ls9v70+938RKhH8ez2/vT04AQlOAnR5df6z/fBSgEOGf0yWln3eh3m8EWvqVeSdAAdZ/Xgqww637v/DP7XcBXIOI4jrrToATrP/8FCDT1+uP8K/hjwK4BrG6rxn/dgIowTbrP6db2XYFynB9/RH+tdwsgFOA1dzL9N0TQAm+s/5zepRlV6BMwr+mhwVwCvjD17PbyvDmCaAE1n9WOdnNDvfH68vnubcD7eQOd/ZnACcBs9iT1V0fgpWA0e3N6O6nQErAqI5k81SYfS5gBGdG+dT3AE4DejubwWIBdhrQUqnxLfZNsNOAVkpmrVponQiUVGtgm6y2MnBEi1tFl2uLQnBLj2v0DzpCljD1nOHlAAAAAElFTkSuQmCC" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #FFF9F0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      /* prevent pull-to-refresh when running as PWA */
+      overscroll-behavior: none;
+    }
+
+    #app {
+      padding: 18px 14px 32px;
+      max-width: 680px;
+      width: 100%;
+    }
+
+    /* ── Header ── */
+    .app-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 900;
+      color: #333;
+      margin-bottom: 14px;
+      letter-spacing: -0.3px;
+    }
+    .app-title span { color: #FF7043; }
+
+    /* ── Top bar ── */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+    .mode-bar { display: flex; gap: 8px; flex-wrap: wrap; flex: 1; }
+
+    .mode-btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 40px;
+      border: 2.5px solid transparent;
+      cursor: pointer;
+      transition: transform 0.15s;
+      background: #fff;
+      color: #555;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    }
+    .mode-btn:active { transform: scale(0.96); }
+    .mode-btn.active-add   { background: #FF7043; color: #fff; border-color: #D84315; }
+    .mode-btn.active-mult  { background: #AB47BC; color: #fff; border-color: #7B1FA2; }
+    .mode-btn.active-sight { background: #42A5F5; color: #fff; border-color: #1565C0; }
+
+    .sound-toggle {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px 16px;
+      border-radius: 40px;
+      border: 2px solid #ddd;
+      background: #fff;
+      color: #888;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .sound-toggle.on  { background: #FFF8E1; border-color: #FFCA28; color: #E65100; }
+    .sound-toggle.off { background: #f5f5f5; border-color: #ddd; color: #aaa; }
+    .sound-toggle:active { transform: scale(0.96); }
+
+    /* ── Difficulty ── */
+    .diff-bar { display: flex; gap: 10px; justify-content: center; margin-bottom: 10px; }
+
+    .diff-btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 20px;
+      border-radius: 40px;
+      border: 2px solid #ddd;
+      background: #fff;
+      color: #888;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .diff-btn:active { transform: scale(0.96); }
+    .diff-btn.d-easy  { border-color: #66BB6A; color: #2E7D32; }
+    .diff-btn.d-med   { border-color: #FFCA28; color: #E65100; }
+    .diff-btn.d-hard  { border-color: #EF5350; color: #B71C1C; }
+    .diff-btn.active.d-easy  { background: #66BB6A; color: #fff; }
+    .diff-btn.active.d-med   { background: #FFCA28; color: #5D4037; }
+    .diff-btn.active.d-hard  { background: #EF5350; color: #fff; }
+
+    .diff-desc {
+      text-align: center;
+      font-size: 13px;
+      color: #bbb;
+      font-weight: 700;
+      margin-bottom: 14px;
+      min-height: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Score row ── */
+    .score-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .score-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
+      border-radius: 18px;
+      font-weight: 900;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.13);
+      min-width: 130px;
+      justify-content: center;
+    }
+    .score-pill-score  { background: #E8F5E9; border: 2.5px solid #A5D6A7; }
+    .score-pill-streak { background: #FFF3E0; border: 2.5px solid #FFCC80; }
+
+    .pill-icon  { font-size: 26px; line-height: 1; }
+    .pill-body  { display: flex; flex-direction: column; align-items: flex-start; }
+    .pill-label { font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; line-height: 1; }
+    .pill-value { font-size: 30px; font-weight: 900; line-height: 1.1; }
+
+    .pill-label-score  { color: #2E7D32; }
+    .pill-value-score  { color: #1B5E20; }
+    .pill-label-streak { color: #E65100; }
+    .pill-value-streak { color: #BF360C; }
+
+    @keyframes bump {
+      0%   { transform: scale(1); }
+      40%  { transform: scale(1.18); }
+      100% { transform: scale(1); }
+    }
+    .bump { animation: bump 0.3s ease-out; }
+
+    /* ── Card area ── */
+    .card-area { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+
+    .flashcard {
+      width: 100%;
+      max-width: 520px;
+      height: 290px;
+      border-radius: 28px;
+      cursor: pointer;
+      position: relative;
+      perspective: 1000px;
+      user-select: none;
+    }
+
+    .card-inner {
+      width: 100%; height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+      border-radius: 28px;
+    }
+    .card-inner.flipped { transform: rotateY(180deg); }
+
+    .card-face {
+      position: absolute; inset: 0;
+      backface-visibility: hidden;
+      border-radius: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.13);
+      background: #fff;
+    }
+    .card-back { transform: rotateY(180deg); }
+
+    .card-top-band {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 12px;
+      border-radius: 28px 28px 0 0;
+    }
+    .band-add   { background: #FF7043; }
+    .band-mult  { background: #AB47BC; }
+    .band-sight { background: #42A5F5; }
+
+    .diff-badge {
+      position: absolute;
+      top: 16px; right: 18px;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .badge-easy { background: #E8F5E9; color: #2E7D32; }
+    .badge-med  { background: #FFF8E1; color: #E65100; }
+    .badge-hard { background: #FFEBEE; color: #B71C1C; }
+
+    .card-emoji    { font-size: 36px; margin-bottom: 6px; }
+    .card-question { font-size: 58px; font-weight: 900; text-align: center; line-height: 1.1; color: #222; }
+    .card-hint     { font-size: 13px; color: #ccc; margin-top: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .card-answer   { font-size: 64px; font-weight: 900; text-align: center; color: #222; }
+    .card-answer-label { font-size: 15px; font-weight: 700; color: #ccc; margin-top: 6px; }
+
+    .feedback {
+      font-size: 22px;
+      font-weight: 900;
+      text-align: center;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .feedback.show { opacity: 1; }
+    .feedback.good { color: #388E3C; }
+    .feedback.miss { color: #C62828; }
+
+    .answer-btns { display: flex; gap: 16px; justify-content: center; }
+
+    .ans-btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      padding: 16px 36px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 5px 14px rgba(0,0,0,0.15);
+      transition: transform 0.12s;
+    }
+    .ans-btn:active { transform: scale(0.96); }
+    .btn-got-it { background: #66BB6A; color: #fff; }
+    .btn-missed { background: #EF5350; color: #fff; }
+
+    .next-btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      padding: 15px 44px;
+      border-radius: 50px;
+      border: none;
+      background: #FFCA28;
+      color: #5D4037;
+      cursor: pointer;
+      box-shadow: 0 5px 16px rgba(0,0,0,0.13);
+      transition: transform 0.12s;
+      display: none;
+    }
+    .next-btn.visible { display: block; }
+    .next-btn:active { transform: scale(0.96); }
+
+    .progress-wrap {
+      width: 100%;
+      max-width: 520px;
+      height: 12px;
+      background: #E0E0E0;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-bar { height: 100%; border-radius: 99px; transition: width 0.4s ease; }
+    .bar-add   { background: #FF7043; }
+    .bar-mult  { background: #AB47BC; }
+    .bar-sight { background: #42A5F5; }
+
+    .round-done {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 36px 20px;
+      text-align: center;
+    }
+    .round-done.show { display: flex; }
+    .done-emoji { font-size: 72px; }
+    .done-title { font-size: 32px; font-weight: 900; color: #333; }
+    .done-sub   { font-size: 17px; color: #888; font-weight: 700; }
+    .play-again-btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      padding: 15px 50px;
+      border-radius: 50px;
+      border: none;
+      background: #42A5F5;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 5px 16px rgba(0,0,0,0.15);
+      margin-top: 6px;
+    }
+    .play-again-btn:active { transform: scale(0.96); }
+
+    /* ── Install banner ── */
+    #installBanner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: #fff;
+      border: 2px solid #FF7043;
+      border-radius: 16px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.10);
+    }
+    #installBanner.show { display: flex; }
+    .install-text { font-size: 14px; font-weight: 700; color: #333; }
+    .install-text span { color: #FF7043; }
+    .install-btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 8px 18px;
+      border-radius: 40px;
+      border: none;
+      background: #FF7043;
+      color: #fff;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .install-dismiss {
+      font-size: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #bbb;
+      padding: 0 4px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div class="app-title">⚡ Flash<span>Cards</span></div>
+
+  <!-- Install-to-home-screen banner -->
+  <div id="installBanner">
+    <div class="install-text">⚡ <span>Add to home screen</span> for full-screen app mode!</div>
+    <button class="install-btn" id="installBtn">Install</button>
+    <button class="install-dismiss" id="installDismiss">✕</button>
+  </div>
+
+  <div class="top-bar">
+    <div class="mode-bar">
+      <button class="mode-btn active-add"  onclick="setMode('add')"   id="btn-add">➕ Addition</button>
+      <button class="mode-btn"             onclick="setMode('mult')"  id="btn-mult">✖️ Multiply</button>
+      <button class="mode-btn"             onclick="setMode('sight')" id="btn-sight">👁️ Sight Words</button>
+    </div>
+    <button class="sound-toggle on" id="soundToggle" onclick="toggleSound()">🔊 Sound</button>
+  </div>
+
+  <div class="diff-bar">
+    <button class="diff-btn d-easy active" onclick="setDiff('easy')" id="dbtn-easy">🟢 Easy</button>
+    <button class="diff-btn d-med"         onclick="setDiff('med')"  id="dbtn-med">🟡 Medium</button>
+    <button class="diff-btn d-hard"        onclick="setDiff('hard')" id="dbtn-hard">🔴 Hard</button>
+  </div>
+  <div class="diff-desc" id="diffDesc">Numbers 1–5</div>
+
+  <div class="score-row">
+    <div class="score-pill score-pill-score">
+      <div class="pill-icon">⭐</div>
+      <div class="pill-body">
+        <div class="pill-label pill-label-score">Score</div>
+        <div class="pill-value pill-value-score" id="scoreVal">0</div>
+      </div>
+    </div>
+    <div class="score-pill score-pill-streak">
+      <div class="pill-icon">🔥</div>
+      <div class="pill-body">
+        <div class="pill-label pill-label-streak">Streak</div>
+        <div class="pill-value pill-value-streak" id="streakVal">0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-area" id="cardArea">
+    <div class="progress-wrap">
+      <div class="progress-bar bar-add" id="progressBar" style="width:0%"></div>
+    </div>
+
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="card-inner" id="cardInner">
+        <div class="card-face card-front">
+          <div class="card-top-band band-add" id="topBandF"></div>
+          <div class="diff-badge badge-easy" id="diffBadgeF">Easy</div>
+          <div class="card-emoji" id="cardEmoji">🧮</div>
+          <div class="card-question" id="cardQuestion">3 + 4</div>
+          <div class="card-hint" id="cardHint">tap to reveal</div>
+        </div>
+        <div class="card-face card-back">
+          <div class="card-top-band band-add" id="topBandB"></div>
+          <div class="diff-badge badge-easy" id="diffBadgeB">Easy</div>
+          <div class="card-answer" id="cardAnswer">7</div>
+          <div class="card-answer-label">answer</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feedback" id="feedback"></div>
+
+    <div class="answer-btns" id="answerBtns" style="display:none">
+      <button class="ans-btn btn-missed" onclick="markAnswer(false)">😬 Missed it</button>
+      <button class="ans-btn btn-got-it" onclick="markAnswer(true)">🎉 Got it!</button>
+    </div>
+    <button class="next-btn" id="nextBtn" onclick="nextCard()">Next card ➡️</button>
+  </div>
+
+  <div class="round-done" id="roundDone">
+    <div class="done-emoji" id="doneEmoji">🏆</div>
+    <div class="done-title" id="doneTitle">Amazing job!</div>
+    <div class="done-sub"   id="doneSub"></div>
+    <button class="play-again-btn" onclick="playAgain()">Play Again!</button>
+  </div>
+</div>
+
+<script>
+  /* ── PWA install prompt ── */
+  let deferredInstallPrompt = null;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    // Only show banner if not already installed
+    if (!window.matchMedia('(display-mode: standalone)').matches) {
+      document.getElementById('installBanner').classList.add('show');
+    }
+  });
+
+  document.getElementById('installBtn').addEventListener('click', async () => {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    const { outcome } = await deferredInstallPrompt.userChoice;
+    if (outcome === 'accepted') {
+      document.getElementById('installBanner').classList.remove('show');
+    }
+    deferredInstallPrompt = null;
+  });
+
+  document.getElementById('installDismiss').addEventListener('click', () => {
+    document.getElementById('installBanner').classList.remove('show');
+  });
+
+  /* ── Inline Service Worker for offline support ── */
+  if ('serviceWorker' in navigator) {
+    const swCode = `
+      const CACHE = 'flashcards-v3';
+      const FONT_URL = 'https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap';
+
+      self.addEventListener('install', (e) => {
+        e.waitUntil(
+          caches.open(CACHE).then(cache => cache.addAll([FONT_URL])).catch(() => {})
+        );
+        self.skipWaiting();
+      });
+
+      self.addEventListener('activate', (e) => {
+        e.waitUntil(
+          caches.keys().then(keys =>
+            Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+          )
+        );
+        self.clients.claim();
+      });
+
+      self.addEventListener('fetch', (e) => {
+        e.respondWith(
+          caches.match(e.request).then(cached => cached || fetch(e.request).catch(() => cached))
+        );
+      });
+    `;
+    const blob = new Blob([swCode], { type: 'application/javascript' });
+    const swUrl = URL.createObjectURL(blob);
+    navigator.serviceWorker.register(swUrl, { scope: '/' }).catch(() => {});
+  }
+
+  /* ── Audio ── */
+  let audioCtx = null;
+  let soundOn = true;
+
+  function getCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+  }
+
+  function playTone(freqs, duration, type, vol) {
+    if (!soundOn) return;
+    try {
+      const ctx = getCtx();
+      freqs.forEach((freq, i) => {
+        const osc  = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = type || 'sine';
+        const t = ctx.currentTime + i * (duration / freqs.length);
+        osc.frequency.setValueAtTime(freq, t);
+        gain.gain.setValueAtTime(vol || 0.18, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + duration / freqs.length);
+        osc.start(t);
+        osc.stop(t + duration / freqs.length + 0.05);
+      });
+    } catch(e) {}
+  }
+
+  const soundFlip     = () => playTone([440, 550], 0.18, 'sine', 0.12);
+  const soundCorrect  = () => playTone([523, 659, 784, 1047], 0.55, 'sine', 0.15);
+  const soundMiss     = () => playTone([330, 220], 0.4, 'triangle', 0.12);
+  const soundStreak   = () => playTone([523, 659, 784, 880, 1047], 0.7, 'sine', 0.15);
+  const soundNext     = () => playTone([392], 0.12, 'sine', 0.08);
+  const soundComplete = () => playTone([523, 659, 784, 659, 784, 1047], 1.1, 'sine', 0.15);
+  const soundMode     = () => playTone([440, 494, 523], 0.3, 'sine', 0.10);
+
+  function toggleSound() {
+    soundOn = !soundOn;
+    const btn = document.getElementById('soundToggle');
+    btn.textContent = soundOn ? '🔊 Sound' : '🔇 Muted';
+    btn.className   = 'sound-toggle ' + (soundOn ? 'on' : 'off');
+  }
+
+  /* ── Data ── */
+  const DIFF_CONFIG = {
+    add: {
+      easy: { desc: 'Numbers 1–5',      gen: () => { const a=r(1,5),  b=r(1,5);  return {q:`${a} + ${b}`, a:`${a+b}`}; } },
+      med:  { desc: 'Numbers 1–10',     gen: () => { const a=r(1,10), b=r(1,10); return {q:`${a} + ${b}`, a:`${a+b}`}; } },
+      hard: { desc: 'Numbers up to 20', gen: () => { const a=r(5,20), b=r(5,20); return {q:`${a} + ${b}`, a:`${a+b}`}; } }
+    },
+    mult: {
+      easy: { desc: 'Times 1, 2 & 5',    gen: () => { const t=[1,2,5]; const a=t[r(0,2)], b=r(1,5);  return {q:`${a} × ${b}`, a:`${a*b}`}; } },
+      med:  { desc: 'Times tables 1–6',  gen: () => { const a=r(1,6),  b=r(1,10); return {q:`${a} × ${b}`, a:`${a*b}`}; } },
+      hard: { desc: 'Times tables 1–12', gen: () => { const a=r(1,12), b=r(1,12); return {q:`${a} × ${b}`, a:`${a*b}`}; } }
+    },
+    sight: {
+      easy: { desc: 'Kindergarten sight words', words: ['the','and','a','is','in','it','of','to','was','he','she','we','I','my','on','at','be','by','do','go','if','no','or','so','up','us'] },
+      med:  { desc: '1st grade sight words',    words: ['said','come','have','from','were','there','little','where','which','their','friend','could','would','should','every','pretty','always','around','because','before','together','people','water','after','again'] },
+      hard: { desc: '2nd & 3rd grade words',    words: ['beautiful','different','important','together','something','between','through','another','children','mountain','question','sentence','thought','understand','usually','without','perhaps','brought','although','enough','nothing','picture','special','whether','example'] }
+    }
+  };
+
+  function r(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
+
+  let mode = 'add', diff = 'easy';
+  let deck = [], idx = 0, score = 0, streak = 0, revealed = false, answered = false;
+  const DECK_SIZE = 10;
+
+  function buildDeck() {
+    const cfg = DIFF_CONFIG[mode][diff];
+    deck = [];
+    if (mode === 'sight') {
+      const pool = [...cfg.words].sort(() => Math.random() - 0.5);
+      for (let i = 0; i < DECK_SIZE && i < pool.length; i++) deck.push({ q: pool[i], a: pool[i] });
+    } else {
+      const used = new Set();
+      let tries = 0;
+      while (deck.length < DECK_SIZE && tries < 200) {
+        tries++;
+        const card = cfg.gen();
+        if (!used.has(card.q)) { used.add(card.q); deck.push(card); }
+      }
+    }
+    idx = 0;
+  }
+
+  function setMode(m) {
+    mode = m;
+    ['add','mult','sight'].forEach(k => {
+      document.getElementById('btn-' + k).className = 'mode-btn' + (k === m ? ' active-' + k : '');
+    });
+    resetScores(); buildDeck(); renderCard(); updateDiffDesc(); soundMode();
+  }
+
+  function setDiff(d) {
+    diff = d;
+    ['easy','med','hard'].forEach(k => {
+      const btn = document.getElementById('dbtn-' + k);
+      btn.className = 'diff-btn d-' + k + (k === d ? ' active' : '');
+    });
+    resetScores(); buildDeck(); renderCard(); updateDiffDesc(); soundMode();
+  }
+
+  function updateDiffDesc() {
+    document.getElementById('diffDesc').textContent = DIFF_CONFIG[mode][diff].desc;
+  }
+
+  function bump(id) {
+    const el = document.getElementById(id);
+    el.classList.remove('bump');
+    void el.offsetWidth;
+    el.classList.add('bump');
+  }
+
+  function resetScores() {
+    score = 0; streak = 0;
+    document.getElementById('scoreVal').textContent = 0;
+    document.getElementById('streakVal').textContent = 0;
+    document.getElementById('roundDone').classList.remove('show');
+    document.getElementById('cardArea').style.display = 'flex';
+  }
+
+  const BAND        = { add:'band-add',   mult:'band-mult',  sight:'band-sight' };
+  const BAR         = { add:'bar-add',    mult:'bar-mult',   sight:'bar-sight'  };
+  const EMOJI       = { add:'🧮',         mult:'✖️',          sight:'📖'          };
+  const HINT        = { add:'tap to reveal', mult:'tap to reveal', sight:'say it aloud, then tap!' };
+  const BADGE_CLASS = { easy:'badge-easy', med:'badge-med', hard:'badge-hard' };
+  const BADGE_LABEL = { easy:'Easy',       med:'Medium',    hard:'Hard'       };
+
+  function renderCard() {
+    if (idx >= deck.length) { showRoundDone(); return; }
+    revealed = false; answered = false;
+    const card = deck[idx];
+
+    document.getElementById('cardInner').classList.remove('flipped');
+    document.getElementById('cardEmoji').textContent = EMOJI[mode];
+    document.getElementById('cardHint').textContent  = HINT[mode];
+
+    const qEl = document.getElementById('cardQuestion');
+    qEl.textContent = card.q;
+    if (mode === 'sight') {
+      qEl.style.fontSize = '64px'; qEl.style.fontStyle = 'italic'; qEl.style.color = '#1565C0';
+    } else {
+      qEl.style.fontSize = '58px'; qEl.style.fontStyle = 'normal'; qEl.style.color = '#222';
+    }
+
+    document.getElementById('cardAnswer').textContent = mode === 'sight' ? card.a.toUpperCase() : card.a;
+
+    ['topBandF','topBandB'].forEach(id =>
+      document.getElementById(id).className = 'card-top-band ' + BAND[mode]
+    );
+    ['diffBadgeF','diffBadgeB'].forEach(id => {
+      const el = document.getElementById(id);
+      el.className   = 'diff-badge ' + BADGE_CLASS[diff];
+      el.textContent = BADGE_LABEL[diff];
+    });
+
+    const pb = document.getElementById('progressBar');
+    pb.style.width = Math.round((idx / DECK_SIZE) * 100) + '%';
+    pb.className = 'progress-bar ' + BAR[mode];
+
+    document.getElementById('answerBtns').style.display = 'none';
+    document.getElementById('nextBtn').classList.remove('visible');
+    const fb = document.getElementById('feedback');
+    fb.className = 'feedback'; fb.textContent = '';
+  }
+
+  function flipCard() {
+    if (answered) return;
+    if (!revealed) {
+      document.getElementById('cardInner').classList.add('flipped');
+      revealed = true;
+      document.getElementById('answerBtns').style.display = 'flex';
+      soundFlip();
+    }
+  }
+
+  function markAnswer(correct) {
+    answered = true;
+    document.getElementById('answerBtns').style.display = 'none';
+    const fb = document.getElementById('feedback');
+    if (correct) {
+      score++; streak++;
+      const msgs = ['Great job! 🌟','You got it! 🎉','Awesome! 🚀','Brilliant! ✨','Nailed it! 💪'];
+      fb.textContent = msgs[r(0, msgs.length - 1)];
+      fb.className = 'feedback show good';
+      if (streak > 0 && streak % 3 === 0) soundStreak();
+      else soundCorrect();
+    } else {
+      streak = 0;
+      const msgs = ["Keep trying! 💪","Almost! 🤔","You'll get it! 😊","Good effort! 🌈"];
+      fb.textContent = msgs[r(0, msgs.length - 1)];
+      fb.className = 'feedback show miss';
+      soundMiss();
+    }
+    document.getElementById('scoreVal').textContent  = score;
+    document.getElementById('streakVal').textContent = streak;
+    bump('scoreVal');
+    if (correct) bump('streakVal');
+    document.getElementById('nextBtn').classList.add('visible');
+  }
+
+  function nextCard() { idx++; soundNext(); renderCard(); }
+
+  function showRoundDone() {
+    document.getElementById('cardArea').style.display = 'none';
+    document.getElementById('roundDone').classList.add('show');
+    const pct = Math.round((score / DECK_SIZE) * 100);
+    let emoji = '⭐', title = 'Good effort!';
+    if (pct === 100) { emoji = '🏆'; title = 'Perfect score!'; }
+    else if (pct >= 80) { emoji = '🌟'; title = 'Amazing job!'; }
+    else if (pct >= 60) { emoji = '😊'; title = 'Nice work!'; }
+    document.getElementById('doneEmoji').textContent = emoji;
+    document.getElementById('doneTitle').textContent = title;
+    document.getElementById('doneSub').textContent   = `You got ${score} out of ${DECK_SIZE} right!`;
+    soundComplete();
+  }
+
+  function playAgain() {
+    resetScores(); buildDeck(); renderCard(); soundMode();
+  }
+
+  buildDeck();
+  renderCard();
+  updateDiffDesc();
+</script>
+</body>
+</html>
