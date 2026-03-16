@@ -233,6 +233,7 @@
     .card-hint     { font-size: 13px; color: #ccc; margin-top: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
     .card-answer   { font-size: 64px; font-weight: 900; text-align: center; color: #222; }
     .card-answer-label { font-size: 15px; font-weight: 700; color: #ccc; margin-top: 6px; }
+    .card-phonetic { font-size: 22px; font-weight: 700; color: #42A5F5; margin-top: 4px; letter-spacing: 1px; font-family: 'Nunito', sans-serif; }
 
     .feedback {
       font-size: 22px;
@@ -387,6 +388,7 @@
       .card-question { font-size: 40px !important; }
       .card-hint { font-size: 11px; margin-top: 6px; }
       .card-answer { font-size: 46px !important; }
+      .card-phonetic { font-size: 16px; }
       .card-answer-label { font-size: 12px; }
       .diff-badge { font-size: 10px; padding: 2px 8px; top: 12px; right: 12px; }
       .card-top-band { height: 8px; }
@@ -472,6 +474,7 @@
           <div class="card-top-band band-add" id="topBandB"></div>
           <div class="diff-badge badge-easy" id="diffBadgeB">Easy</div>
           <div class="card-answer" id="cardAnswer">7</div>
+          <div class="card-phonetic" id="cardPhonetic" style="display:none"></div>
           <div class="card-answer-label">answer</div>
         </div>
       </div>
@@ -611,9 +614,43 @@
       hard: { desc: 'Times tables 1–12', gen: () => { const a=r(1,12), b=r(1,12); return {q:`${a} × ${b}`, a:`${a*b}`}; } }
     },
     sight: {
-      easy: { desc: 'Kindergarten sight words', words: ['the','and','a','is','in','it','of','to','was','he','she','we','I','my','on','at','be','by','do','go','if','no','or','so','up','us'] },
-      med:  { desc: '1st grade sight words',    words: ['said','come','have','from','were','there','little','where','which','their','friend','could','would','should','every','pretty','always','around','because','before','together','people','water','after','again'] },
-      hard: { desc: '2nd & 3rd grade words',    words: ['beautiful','different','important','together','something','between','through','another','children','mountain','question','sentence','thought','understand','usually','without','perhaps','brought','although','enough','nothing','picture','special','whether','example'] }
+      easy: { desc: 'Kindergarten sight words', words: [
+        {q:'the',p:'th-UH'},{q:'and',p:'AND'},{q:'a',p:'AY'},
+        {q:'is',p:'IZ'},{q:'in',p:'IN'},{q:'it',p:'IT'},
+        {q:'of',p:'UV'},{q:'to',p:'TOO'},{q:'was',p:'WUZ'},
+        {q:'he',p:'HEE'},{q:'she',p:'SHEE'},{q:'we',p:'WEE'},
+        {q:'I',p:'EYE'},{q:'my',p:'MY'},{q:'on',p:'ON'},
+        {q:'at',p:'AT'},{q:'be',p:'BEE'},{q:'by',p:'BY'},
+        {q:'do',p:'DOO'},{q:'go',p:'GOH'},{q:'if',p:'IF'},
+        {q:'no',p:'NOH'},{q:'or',p:'OR'},{q:'so',p:'SOH'},
+        {q:'up',p:'UP'},{q:'us',p:'US'}
+      ]},
+      med: { desc: '1st grade sight words', words: [
+        {q:'said',p:'SED'},{q:'come',p:'KUM'},{q:'have',p:'HAV'},
+        {q:'from',p:'FRUM'},{q:'were',p:'WUR'},{q:'there',p:'THAIR'},
+        {q:'little',p:'LIT-ul'},{q:'where',p:'WAIR'},{q:'which',p:'WICH'},
+        {q:'their',p:'THAIR'},{q:'friend',p:'FREND'},{q:'could',p:'KUD'},
+        {q:'would',p:'WUD'},{q:'should',p:'SHUD'},{q:'every',p:'EV-ree'},
+        {q:'pretty',p:'PRIT-ee'},{q:'always',p:'AWL-wayz'},{q:'around',p:'uh-ROWND'},
+        {q:'because',p:'bih-KUZ'},{q:'before',p:'bih-FOR'},{q:'together',p:'tuh-GETH-ur'},
+        {q:'people',p:'PEE-pul'},{q:'water',p:'WAW-tur'},{q:'after',p:'AF-tur'},
+        {q:'again',p:'uh-GEN'}
+      ]},
+      hard: { desc: '2nd & 3rd grade words', words: [
+        {q:'beautiful',p:'BYOO-tih-ful'},{q:'different',p:'DIF-ur-unt'},
+        {q:'important',p:'im-POR-tunt'},{q:'something',p:'SUM-thing'},
+        {q:'between',p:'bih-TWEEN'},{q:'through',p:'THROO'},
+        {q:'another',p:'uh-NUTH-ur'},{q:'children',p:'CHIL-drun'},
+        {q:'mountain',p:'MOWN-tun'},{q:'question',p:'KWES-chun'},
+        {q:'sentence',p:'SEN-tunss'},{q:'thought',p:'THAWT'},
+        {q:'understand',p:'un-dur-STAND'},{q:'usually',p:'YOO-zhoo-uh-lee'},
+        {q:'without',p:'with-OWT'},{q:'perhaps',p:'pur-HAPS'},
+        {q:'brought',p:'BRAWT'},{q:'although',p:'awl-THOH'},
+        {q:'enough',p:'ih-NUF'},{q:'nothing',p:'NUTH-ing'},
+        {q:'picture',p:'PIK-chur'},{q:'special',p:'SPESH-ul'},
+        {q:'whether',p:'WETH-ur'},{q:'example',p:'ig-ZAM-pul'},
+        {q:'together',p:'tuh-GETH-ur'}
+      ]}
     }
   };
 
@@ -628,7 +665,7 @@
     deck = [];
     if (mode === 'sight') {
       const pool = [...cfg.words].sort(() => Math.random() - 0.5);
-      for (let i = 0; i < DECK_SIZE && i < pool.length; i++) deck.push({ q: pool[i], a: pool[i] });
+      for (let i = 0; i < DECK_SIZE && i < pool.length; i++) deck.push({ q: pool[i].q, a: pool[i].q, p: pool[i].p });
     } else {
       const used = new Set();
       let tries = 0;
@@ -701,7 +738,14 @@
       qEl.style.fontSize = '58px'; qEl.style.fontStyle = 'normal'; qEl.style.color = '#222';
     }
 
-    document.getElementById('cardAnswer').textContent = mode === 'sight' ? card.a.toUpperCase() : card.a;
+    if (mode === 'sight') {
+      document.getElementById('cardAnswer').textContent = card.a.toUpperCase();
+      document.getElementById('cardPhonetic').textContent = card.p || '';
+      document.getElementById('cardPhonetic').style.display = 'block';
+    } else {
+      document.getElementById('cardAnswer').textContent = card.a;
+      document.getElementById('cardPhonetic').style.display = 'none';
+    }
 
     ['topBandF','topBandB'].forEach(id =>
       document.getElementById(id).className = 'card-top-band ' + BAND[mode]
