@@ -53,20 +53,23 @@
     .app-title span { color: #FF7043; }
 
     /* ── Top bar ── */
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      gap: 8px;
+    .mode-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 8px;
     }
-    .mode-bar { display: flex; gap: 8px; flex-wrap: wrap; flex: 1; }
+    .sound-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
 
     .mode-btn {
       font-family: 'Nunito', sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
-      padding: 10px 18px;
+      padding: 9px 10px;
       border-radius: 40px;
       border: 2.5px solid transparent;
       cursor: pointer;
@@ -74,9 +77,12 @@
       background: #fff;
       color: #555;
       box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      white-space: nowrap;
+      text-align: center;
     }
     .mode-btn:active { transform: scale(0.96); }
     .mode-btn.active-add   { background: #FF7043; color: #fff; border-color: #D84315; }
+    .mode-btn.active-sub   { background: #26A69A; color: #fff; border-color: #00695C; }
     .mode-btn.active-mult  { background: #AB47BC; color: #fff; border-color: #7B1FA2; }
     .mode-btn.active-sight { background: #42A5F5; color: #fff; border-color: #1565C0; }
 
@@ -211,6 +217,7 @@
       border-radius: 28px 28px 0 0;
     }
     .band-add   { background: #FF7043; }
+    .band-sub   { background: #26A69A; }
     .band-mult  { background: #AB47BC; }
     .band-sight { background: #42A5F5; }
 
@@ -294,6 +301,7 @@
     }
     .progress-bar { height: 100%; border-radius: 99px; transition: width 0.4s ease; }
     .bar-add   { background: #FF7043; }
+    .bar-sub   { background: #26A69A; }
     .bar-mult  { background: #AB47BC; }
     .bar-sight { background: #42A5F5; }
 
@@ -368,9 +376,9 @@
 
       .app-title { font-size: 18px; margin-bottom: 10px; }
 
-      .top-bar { gap: 6px; }
-      .mode-bar { gap: 6px; }
-      .mode-btn { font-size: 12px; padding: 7px 10px; }
+      .mode-grid { gap: 4px; margin-bottom: 6px; }
+      .mode-btn { font-size: 12px; padding: 7px 8px; }
+      .sound-row { margin-bottom: 8px; }
       .sound-toggle { font-size: 12px; padding: 7px 10px; }
 
       .diff-bar { gap: 6px; }
@@ -423,13 +431,14 @@
     <button class="install-dismiss" id="installDismiss">✕</button>
   </div>
 
-  <div class="top-bar">
-    <div class="mode-bar">
-      <button class="mode-btn active-add"  onclick="setMode('add')"   id="btn-add">➕ Addition</button>
-      <button class="mode-btn"             onclick="setMode('mult')"  id="btn-mult">✖️ Multiply</button>
-      <button class="mode-btn"             onclick="setMode('sight')" id="btn-sight">👁️ Sight Words</button>
-    </div>
-    <button class="sound-toggle on" id="soundToggle" onclick="toggleSound()">🔊 Sound</button>
+  <div class="mode-grid">
+    <button class="mode-btn active-add"  onclick="setMode('add')"   id="btn-add">➕ Addition</button>
+    <button class="mode-btn"             onclick="setMode('sub')"   id="btn-sub">➖ Subtract</button>
+    <button class="mode-btn"             onclick="setMode('mult')"  id="btn-mult">✖️ Multiply</button>
+    <button class="mode-btn"             onclick="setMode('sight')" id="btn-sight">👁️ Sight Words</button>
+  </div>
+  <div class="sound-row">
+    <button class="sound-toggle on" id="soundToggle" onclick="toggleSound()">🔊 Sound On</button>
   </div>
 
   <div class="diff-bar">
@@ -608,6 +617,11 @@
       med:  { desc: 'Numbers 1–10',     gen: () => { const a=r(1,10), b=r(1,10); return {q:`${a} + ${b}`, a:`${a+b}`}; } },
       hard: { desc: 'Numbers up to 20', gen: () => { const a=r(5,20), b=r(5,20); return {q:`${a} + ${b}`, a:`${a+b}`}; } }
     },
+    sub: {
+      easy: { desc: 'Numbers 1–5',      gen: () => { const a=r(1,5),  b=r(0,a); return {q:`${a} - ${b}`, a:`${a-b}`}; } },
+      med:  { desc: 'Numbers 1–10',     gen: () => { const a=r(1,10), b=r(0,a); return {q:`${a} - ${b}`, a:`${a-b}`}; } },
+      hard: { desc: 'Numbers up to 20', gen: () => { const a=r(5,20), b=r(0,a); return {q:`${a} - ${b}`, a:`${a-b}`}; } }
+    },
     mult: {
       easy: { desc: 'Times 1, 2 & 5',    gen: () => { const t=[1,2,5]; const a=t[r(0,2)], b=r(1,5);  return {q:`${a} × ${b}`, a:`${a*b}`}; } },
       med:  { desc: 'Times tables 1–6',  gen: () => { const a=r(1,6),  b=r(1,10); return {q:`${a} × ${b}`, a:`${a*b}`}; } },
@@ -680,7 +694,7 @@
 
   function setMode(m) {
     mode = m;
-    ['add','mult','sight'].forEach(k => {
+    ['add','sub','mult','sight'].forEach(k => {
       document.getElementById('btn-' + k).className = 'mode-btn' + (k === m ? ' active-' + k : '');
     });
     resetScores(); buildDeck(); renderCard(); updateDiffDesc(); soundMode();
@@ -714,10 +728,10 @@
     document.getElementById('cardArea').style.display = 'flex';
   }
 
-  const BAND        = { add:'band-add',   mult:'band-mult',  sight:'band-sight' };
-  const BAR         = { add:'bar-add',    mult:'bar-mult',   sight:'bar-sight'  };
-  const EMOJI       = { add:'🧮',         mult:'✖️',          sight:'📖'          };
-  const HINT        = { add:'tap to reveal', mult:'tap to reveal', sight:'say it aloud, then tap!' };
+  const BAND        = { add:'band-add',   sub:'band-sub',   mult:'band-mult',  sight:'band-sight' };
+  const BAR         = { add:'bar-add',    sub:'bar-sub',    mult:'bar-mult',   sight:'bar-sight'  };
+  const EMOJI       = { add:'🧮',         sub:'➖',          mult:'✖️',          sight:'📖'          };
+  const HINT        = { add:'tap to reveal', sub:'tap to reveal', mult:'tap to reveal', sight:'say it aloud, then tap!' };
   const BADGE_CLASS = { easy:'badge-easy', med:'badge-med', hard:'badge-hard' };
   const BADGE_LABEL = { easy:'Easy',       med:'Medium',    hard:'Hard'       };
 
